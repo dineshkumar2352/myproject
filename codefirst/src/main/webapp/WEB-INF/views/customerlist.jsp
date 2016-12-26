@@ -4,7 +4,7 @@
 <%@ page session="false" %>
 <h3>Persons List</h3>
 <c:if test="${!empty custList}">
-	<table>
+	<table border="1">
 	<tr>
 		<th width="80">customer ID</th>
 		<th width="120"> Name</th>

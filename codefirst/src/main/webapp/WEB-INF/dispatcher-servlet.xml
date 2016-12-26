@@ -15,6 +15,7 @@ http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 	<context:component-scan base-package="com.niit.controller" />
 	<context:component-scan base-package="com.niit.model" />
 	<context:component-scan base-package="com.niit.dao" />
+	<context:component-scan base-package="com.niit.service" />
 
 	<mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
 	<mvc:resources mapping="/resources/images/**" location="/resources/"></mvc:resources>

@@ -1,5 +1,7 @@
 package com.niit.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +10,10 @@ import javax.persistence.Id;
 
 
 @Entity 
-public class Customer {
+public class Customer implements Serializable {
+
+	public static final long serialVersionUID = -723583058586873479L;
+
 	@Id
 	@Column
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -69,5 +74,7 @@ public class Customer {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 }

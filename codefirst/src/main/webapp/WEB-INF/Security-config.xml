@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd 
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+	<security:http auto-config="true" use-expressions="true">
+		<security:intercept-url pattern="/" access="permitAll" />
+		<security:intercept-url pattern="/index" access="permitAll" />
+		<security:intercept-url pattern="/loginFail" access="permitAll" />
+		<security:intercept-url pattern="/Aboutus" access="permitAll" />
+		<security:intercept-url pattern="/cart" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')" />
+        <security:form-login login-page="/login"
+			default-target-url="/home?login=true" authentication-failure-url="/loginFail" />
+		<security:logout logout-success-url="/logout" logout-url="/j_spring_security_logout" />
+	</security:http>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="dinesh@gmail.com"
+					password="password" authorities="ROLE_ADMIN" />
+				<security:user name="richard@hotmail.com" password="password"
+					authorities="ROLE_USER" />
+			</security:user-service>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="select C_ID,username,password from Customer where username=?"
+				authorities-by-username-query="select c.username,u.role_name from Customer c,roles u where c.C_ID=u.role_id and c.username=?" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
